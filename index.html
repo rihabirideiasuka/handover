@@ -1,78 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#ff1493" />
-  <meta name="robots" content="noindex, nofollow" />
-
-  <!-- iOS ホーム画面 -->
+  <meta charset="UTF-8" />
+  <title>本日の申し送り</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1556d1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="申し送り" />
+  <meta name="apple-mobile-web-app-title" content="本日の申し送り" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <!-- アイコン類 -->
-  <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <!-- PC用ファビコン -->
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
 
-  <!-- Android/PC（ショートカット名やアイコンの補助） -->
-  <link rel="manifest" href="./manifest.webmanifest" />
-
-  <title>申し送り（起動）</title>
+  <!-- iPhoneホーム画面用 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png" />
 
   <style>
-    :root{--bg:#f9f5ee;--fg:#222;--muted:#666;--accent:#ff1493}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif}
-    .wrap{max-width:720px;margin:10vh auto;padding:24px}
-    .card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:22px;box-shadow:0 6px 22px rgba(0,0,0,.06)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;
-         background:var(--accent);color:#fff;text-decoration:none;font-weight:800;border:0;cursor:pointer}
-    .ghost{background:#fff;color:var(--fg);border:1px solid rgba(0,0,0,.12)}
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    small{color:var(--muted)}
-  </style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --accent:#1556d1;
+      --line:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .card{
+      width:min(92vw,420px);
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:24px 20px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      text-align:center;
+    }
+    .icon{
+      width:72px;
+      height:72px;
+      border-radius:18px;
+      display:block;
+      margin:0 auto 16px;
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:20px;
+      line-height:1.4;
+    }
+    p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:14px;
+    }
+    .dots{
+      margin-top:16px;
+      display:flex;
+      gap:8px;
+      justify-content:center;
+    }
+    .dots span{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--accent);
+      opacity:.25;
+      animation:blink 1.2s infinite ease-in-out;
+    }
+    .dots span:nth-child(2){animation-delay:.2s}
+    .dots span:nth-child(3){animation-delay:.4s}
 
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwrcoOYZQJa22ySCYHAeRqFea1PMU74O9Lv4ttXISZbacJS_-6GxpmSlPGIcHiAhD_m/exec">
-  </noscript>
+    @keyframes blink{
+      0%,80%,100%{transform:scale(1);opacity:.25}
+      40%{transform:scale(1.35);opacity:1}
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1 style="margin:0 0 6px;font-size:1.25rem">起動中…</h1>
-      <div id="msg"><small>自動で申し送りに移動します。開かない場合は下のボタンを押してください。</small></div>
-      <div class="row">
-        <a id="go" class="btn" href="#">今すぐ開く</a>
-        <a class="btn ghost" href="./install.html">ホーム追加の手順</a>
-      </div>
+  <div class="card">
+    <img class="icon" src="./icon-180.png" alt="アイコン" />
+    <h1>本日の申し送り</h1>
+    <p>アプリを開いています…</p>
+    <div class="dots">
+      <span></span><span></span><span></span>
     </div>
   </div>
 
   <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwrcoOYZQJa22ySCYHAeRqFea1PMU74O9Lv4ttXISZbacJS_-6GxpmSlPGIcHiAhD_m/exec";
+    // ===== ここを自分の Apps Script /exec URL に変更 =====
+    const EXEC_URL = 'YOUR_APPS_SCRIPT_EXEC_URL';
 
-    // stay=1 のときは自動遷移しない（共有メニューを押しやすくする用）
-    const u = new URL(location.href);
-    const stay = u.searchParams.get('stay') === '1';
+    (function () {
+      const search = window.location.search || '';
+      const hash   = window.location.hash || '';
+      const target = EXEC_URL + search + hash;
 
-    // このページのクエリは（stay以外）GASへ引き継ぐ
-    const out = new URL(GAS_URL);
-    u.searchParams.forEach((v,k)=>{
-      if(k === 'stay') return;
-      out.searchParams.append(k,v);
-    });
-    const target = out.toString() + (location.hash || '');
-
-    document.getElementById('go').href = target;
-
-    if (!stay) {
-      // 履歴を汚さず移動
-      setTimeout(()=>location.replace(target), 250);
-    } else {
-      document.getElementById('msg').innerHTML =
-        "<small>自動遷移を止めています（stay=1）。共有→ホーム画面に追加がしやすい状態です。</small>";
-    }
+      // 少しだけ表示してから遷移
+      setTimeout(() => {
+        window.location.replace(target);
+      }, 150);
+    })();
   </script>
 </body>
 </html>
